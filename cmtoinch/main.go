@@ -1,18 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-func main() {
-	var cm float64 = 15
-	f, i := convert(cm)
-	fmt.Println(cm, " cm  is: ", f, "ft")
-	fmt.Println(cm, " cm  is: ", i, "inch")
+type measures struct {
+	feet int
+	inch float64
+}
+
+func convert(cm float64) measures {
+
+	inch := cm / Inches
+	feet := inch / Foot
+
+	a := math.Mod(inch, 12) //function calculate  %12
+
+	calculate := measures{int(feet), a}
+	return calculate
 
 }
 
-func convert(cm float64) (float64, float64) {
-	inch := cm / 2.54
-	feet := cm / 30.48
+//Inches is 2.54 cm
+const Inches = 2.54
 
-	return feet, inch
+//Foot is 12 inch
+const Foot = 12
+
+func main() {
+	var cm float64
+	fmt.Println("Please enter your number : ")
+	fmt.Scan(&cm)
+	i := convert(cm)
+	fmt.Println(i)
+
 }
