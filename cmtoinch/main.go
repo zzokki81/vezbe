@@ -17,7 +17,7 @@ func (cm centimeter) convert() (int, float64) {
 	inches := cm / cmInInches
 	feet := inches / inchesInFoot
 	floatinches := float64(inches)
-	return int(feet), float64(math.Mod(floatinches, 12))
+	return int(feet), math.Mod(floatinches, 12)
 }
 
 func main() {
