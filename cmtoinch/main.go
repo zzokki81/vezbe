@@ -5,28 +5,24 @@ import (
 	"math"
 )
 
-const cmInInches = 2.54
-const inchesInFoot = 12
+const (
+	cmInInches   = 2.54
+	inchesInFoot = 12
+)
 
-type imperialLength struct {
-	feet   int
-	inches float64
-}
+type centimeter float64
 
-func convert(cm float64) imperialLength {
+func (cm centimeter) convert() (int, float64) {
 
 	inches := cm / cmInInches
 	feet := inches / inchesInFoot
-	mouduoInches := math.Mod(inches, 12)
-	return imperialLength{int(feet), mouduoInches}
-
+	floatinches := float64(inches)
+	return int(feet), float64(math.Mod(floatinches, 12))
 }
 
 func main() {
-	var cm float64
+	cm := centimeter(10)
 	fmt.Println("Please enter your number : ")
 	fmt.Scan(&cm)
-	i := convert(cm)
-	fmt.Println(i)
-
+	fmt.Println(cm.convert())
 }
