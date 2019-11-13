@@ -21,8 +21,8 @@ func (cm centimeter) convert() (int, float64) {
 }
 
 func main() {
-	cm := centimeter(10)
-	fmt.Println("Please enter your number : ")
-	fmt.Scan(&cm)
+
+	cm := centimeter(10) //Type your desired length in centimeters
 	fmt.Println(cm.convert())
+
 }
