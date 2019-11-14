@@ -1,28 +1,19 @@
 package main
 
-import "fmt"
-
-func main() {
-
-	unsort := []int{23, 11, 43, 52, 22, 67, 56, 34, 18}
-	BubbleSort(unsort)
-	fmt.Println("Before sorting : ", unsort)
-	fmt.Println("After sorting : ", unsort)
-
-}
+import (
+	"fmt"
+)
 
 type Sortable interface {
 	Less(i, j int) bool
 	Swap(i, j int)
 }
 
-type nums = []int 
+type nums = []int
 
-func(n *num) Less(i, j int) {
+func (n *num) Less(i, j int) {
 	return n[i] < n[j]
 }
-
- 
 
 func BubbleSort(unsort []int) {
 
@@ -44,5 +35,14 @@ func BubbleSort(unsort []int) {
 			break
 		}
 	}
+
+
+
+func main() {
+
+	unsort := []int{23, 11, 43, 52, 22, 67, 56, 34, 18}
+	BubbleSort(unsort)
+	fmt.Println("Before sorting : ", unsort)
+	fmt.Println("After sorting : ", unsort)
 
 }
