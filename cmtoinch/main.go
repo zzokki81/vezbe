@@ -5,6 +5,11 @@ import (
 	"math"
 )
 
+type imperialLength struct {
+	feet   int
+	inches float64
+}
+
 const (
 	cmInInches   = 2.54
 	inchesInFoot = 12
@@ -12,17 +17,18 @@ const (
 
 type centimeter float64
 
-func (cm centimeter) convert() (int, float64) {
+func (cm centimeter) convert() imperialLength {
 
-	inches := cm / cmInInches
+	inches := float64(cm / cmInInches)
 	feet := inches / inchesInFoot
-	floatinches := float64(inches)
-	return int(feet), math.Mod(floatinches, 12)
+	return imperialLength{int(feet), math.Mod(inches, inchesInFoot)}
+
 }
-
 func main() {
-
-	cm := centimeter(10) //Type your desired length in centimeters
-	fmt.Println(cm.convert())
+	var cm float64
+	fmt.Println("Type your desired length in centimeters : ")
+	result := centimeter(cm)
+	fmt.Scan(&result)
+	fmt.Println(result, "Centimeters in Ft and Inch is : ", result.convert())
 
 }
