@@ -14,14 +14,14 @@ func main() {
 	fmt.Print("< ")
 	quote, err := reader.ReadString('\n')
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	fmt.Println("> Who said it?")
 	fmt.Print("< ")
 	performer, err := reader.ReadString('\n')
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 
 	fmt.Printf("> %v says, %q.\n", strings.TrimSpace(performer), strings.TrimSpace(quote))
