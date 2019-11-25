@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -11,12 +12,18 @@ func main() {
 
 	fmt.Println("> What is the quote?")
 	fmt.Print("< ")
-	answer1, _ := reader.ReadString('\n')
+	quote, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	fmt.Println("> Who said it?")
 	fmt.Print("< ")
-	answer2, _ := reader.ReadString('\n')
+	performer, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	fmt.Printf("> %v says, %s", answer2[:len(answer2)-1], answer1)
+	fmt.Printf("> %v says, %q.\n", strings.TrimSpace(performer), strings.TrimSpace(quote))
 
 }
