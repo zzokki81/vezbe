@@ -1,9 +1,9 @@
 package tempfunctions
 
 type (
-	celsius    float64
-	kelvin     float64
-	fahrenheit float64
+	Celsius    float64
+	Kelvin     float64
+	Fahrenheit float64
 )
 
 const (
@@ -11,28 +11,34 @@ const (
 	absoluteZeroF = 459.67
 )
 
-func (c celsius) ToKelvinF() kelvin {
-	return kelvin(c + absoluteZeroC)
+// ToKelvin method for convert Celsius to Kelvin
+func (c Celsius) ToKelvin() Kelvin {
+	return Kelvin(c + absoluteZeroC)
 
 }
 
-func (c celsius) ToFahrenheit() fahrenheit {
-	return fahrenheit((c * 9 / 5) + 32)
+// ToFahrenheit method for converting Celsius to Fahrenheit
+func (c Celsius) ToFahrenheit() Fahrenheit {
+	return Fahrenheit((c * 9 / 5) + 32)
 
 }
 
-func (k kelvin) ToCelsius() celsius {
-	return celsius(k - absoluteZeroC)
+//ToCelsius method for converting Kelvin to Celsius
+func (k Kelvin) ToCelsius() Celsius {
+	return Celsius(k - absoluteZeroC)
 }
-func (k kelvin) ToFahrenheit() fahrenheit {
-	return fahrenheit((k * 9 / 5) - absoluteZeroF)
 
+// ToFahrenheit method for converting Kelvin to Fahrenheit
+func (k Kelvin) ToFahrenheit() Fahrenheit {
+	return Fahrenheit((k * 9 / 5) - absoluteZeroF)
 }
-func (f fahrenheit) ToCelsius() celsius {
-	return celsius((f - 32) * 5 / 9)
 
+//ToCelsius method for converting Fahrenheit to Celsius
+func (f Fahrenheit) ToCelsius() Celsius {
+	return Celsius((f - 32) * 5 / 9)
 }
-func (f fahrenheit) ToKelvin() kelvin {
-	return kelvin((f + absoluteZeroF) * 5 / 9)
 
+//ToKelvin method for converting Fahrenheit to Kelvin
+func (f Fahrenheit) ToKelvin() Kelvin {
+	return Kelvin((f + absoluteZeroF) * 5 / 9)
 }
