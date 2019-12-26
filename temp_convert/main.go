@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	tf "vezbe/temp_convert/tempfunctions"
+	tf "github.com/zzokki81/vezbe/tempfunctions"
 )
 
 func main() {
