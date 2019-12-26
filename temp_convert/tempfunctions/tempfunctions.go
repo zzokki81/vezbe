@@ -9,15 +9,14 @@ type (
 const (
 	ABSOLUTEZEROC = 273.15
 	ABSOLUTEZEROF = 459.67
-	CONVERTCF = 0.556
-	CONVERTFC = 1.8
-	ZEROCINFAHR = 32
+	CONVERTCF     = 0.556
+	CONVERTFC     = 1.8
+	ZEROCINFAHR   = 32
 )
 
 // ToKelvin method for convert Celsius to Kelvin
 func (c Celsius) ToKelvin() Kelvin {
 	return Kelvin(c + ABSOLUTEZEROC)
-
 
 }
 
@@ -39,10 +38,10 @@ func (k Kelvin) ToFahrenheit() Fahrenheit {
 
 //ToCelsius method for converting Fahrenheit to Celsius
 func (f Fahrenheit) ToCelsius() Celsius {
-	return Celsius((f - ZEROCINFAHR) *CONVERTCF )
+	return Celsius((f - ZEROCINFAHR) * CONVERTCF)
 }
 
 //ToKelvin method for converting Fahrenheit to Kelvin
 func (f Fahrenheit) ToKelvin() Kelvin {
-	return Kelvin((f + ABSOLUTEZEROF) * CONVERTCF )
+	return Kelvin((f + ABSOLUTEZEROF) * CONVERTCF)
 }
