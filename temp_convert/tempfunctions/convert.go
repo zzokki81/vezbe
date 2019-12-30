@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func Convert() (float64, string, error) {
+func Parse() (float64, string, error) {
 	userInputString, err := Input()
 	if err != nil {
 		return 0.0, "", err

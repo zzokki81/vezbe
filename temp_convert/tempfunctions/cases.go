@@ -9,7 +9,7 @@ import (
 //It can be used to convert between three temperature format C,K,F
 func Cases() error {
 
-	temperature, unit, err := Convert()
+	temperature, unit, err := Parse()
 	if err != nil {
 		return err
 	}
