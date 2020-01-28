@@ -3,12 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 )
 
-type comics struct {
+type comic struct {
 	Month      string `json:"month"`
 	Num        int    `json:"num"`
 	Link       string `json:"link"`
@@ -22,26 +21,44 @@ type comics struct {
 	Day        string `json:"day"`
 }
 
-func main() {
+func comicFetch(url string) (*comic, error) {
 
-	response, err := http.Get("https://xkcd.com/info.0.json")
+	client := &http.Client{}
+	request, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
+	}
+
+	response, err := client.Do(request)
+	if err != nil {
+		return nil, err
 	}
 
 	defer response.Body.Close()
-	contents, err := ioutil.ReadAll(response.Body)
+
+	var comicBook comic
+
+	err = json.NewDecoder(response.Body).Decode(&comicBook)
+	if err != nil {
+		return nil, err
+	}
+	return &comicBook, nil
+}
+
+func comicLastFetch() (*comic, error) {
+
+	response, err := comicFetch("https://xkcd.com/info.0.json")
 	if err != nil {
 		log.Fatal(err)
 	}
+	return response, nil
+}
 
-	comicsBook := comics{}
-
-	err = json.Unmarshal(contents, &comicsBook)
+func main() {
+	comicBook, err := comicLastFetch()
 	if err != nil {
-		log.Println(err)
-	} else {
-		fmt.Println(comicsBook)
+		log.Fatal(err)
 	}
+	fmt.Println(comicBook)
 
 }
