@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-type comic struct {
+type Comic struct {
 	Month      string `json:"month"`
 	Num        int    `json:"num"`
 	Link       string `json:"link"`
@@ -21,7 +21,13 @@ type comic struct {
 	Day        string `json:"day"`
 }
 
-func comicFetch(url string) (*comic, error) {
+type xkcdClient struct {
+	host string
+}
+
+const path = "info.0.json"
+
+func fetchComic(url string) (*Comic, error) {
 
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", url, nil)
@@ -36,29 +42,32 @@ func comicFetch(url string) (*comic, error) {
 
 	defer response.Body.Close()
 
-	var comicBook comic
+	var comic Comic
 
-	err = json.NewDecoder(response.Body).Decode(&comicBook)
-	if err != nil {
+	if err = json.NewDecoder(response.Body).Decode(&comic); err != nil {
 		return nil, err
+
 	}
-	return &comicBook, nil
+	return &comic, nil
 }
 
-func comicLastFetch() (*comic, error) {
+func fetchLastComic() (*Comic, error) {
+	adress := xkcdClient{"https://xkcd.com/"}
 
-	response, err := comicFetch("https://xkcd.com/info.0.json")
+	response, err := fetchComic(adress.host + path)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	return response, nil
 }
 
 func main() {
-	comicBook, err := comicLastFetch()
+	comicBook, err := fetchLastComic()
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println(comicBook)
 
 }
+
+//"https://xkcd.com/info.0.json"
