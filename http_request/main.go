@@ -69,5 +69,3 @@ func main() {
 	fmt.Println(comicBook)
 
 }
-
-//"https://xkcd.com/info.0.json"
