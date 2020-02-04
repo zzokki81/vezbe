@@ -1,7 +1,8 @@
-package functions
+package calculate
 
-func AverageValue(list *[][]float64) []float64 {
+func MeanValue(list *[][]float64) []float64 {
 	as1, as2, as3, as4 := 0.0, 0.0, 0.0, 0.0
+
 	for _, v := range *list {
 		as1 += v[0]
 		as2 += v[1]
