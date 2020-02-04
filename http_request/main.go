@@ -61,11 +61,38 @@ func fetchLastComic() (*Comic, error) {
 	return response, nil
 }
 
+func getComics(comic *Comic, slice *[]Comic) error {
+
+	for i := comic.Num - 1; i > comic.Num-5; i-- {
+		url := fmt.Sprintf("http://xkcd.com/%d/info.0.json", i)
+
+		tempComic, err := fetchComic(url)
+		if err != nil {
+			log.Fatal(err)
+			return err
+		}
+		*slice = append(*slice, *tempComic)
+	}
+	return nil
+}
+
 func main() {
+
 	comicBook, err := fetchLastComic()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(comicBook)
+	comics := []Comic{}
+	comics = append(comics, *comicBook)
 
+	err1 := getComics(comicBook, &comics)
+	if err1 != nil {
+		log.Fatal(err1)
+	}
+
+	fmt.Println("Last five:\n")
+	for i, lastFive := range comics {
+		fmt.Print(i+1, ": ")
+		fmt.Println(lastFive)
+	}
 }
